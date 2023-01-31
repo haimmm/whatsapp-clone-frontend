@@ -1,0 +1,9 @@
+
+
+.footer-buttons{
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}

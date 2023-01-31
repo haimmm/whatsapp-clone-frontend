@@ -1,0 +1,34 @@
+.message-group{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding: 15px;
+  width: 90%;
+  height: 70%;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+
+}
+
+input{
+  width:100%;
+  height:30px
+}
+
+.message-box{
+  
+  display: flex;
+  align-items: center;
+}
+
+.message-group > input{
+  width: 100%;
+  margin-left: 15px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.message-group > input:focus{
+  outline: none;
+}

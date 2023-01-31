@@ -1,0 +1,43 @@
+.chat-container{
+    /* border: 1px solid green; */
+    width: 85%;
+    height: 90px;
+    padding: 10px 0;
+    display: flex;
+
+}
+
+.chat-info{
+    border-bottom: 1px solid #E9EDEF;
+    width: 100%;
+    margin-left: 10px;
+    color: #6B7C85;
+    padding-bottom: 15px;
+}
+
+.name-time-box{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.name-time-box > h3{
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.name-time-box > time{
+    font-size: 0.875rem;
+}
+
+.lastMessage-unread-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.unreaded-counter{
+    background-color: #25D366;
+    border-radius: 10px;
+    color: white;
+    padding: 3px 7px;
+}

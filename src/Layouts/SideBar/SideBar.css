@@ -1,0 +1,10 @@
+.side-container {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  min-width: 400px;
+  position: relative;
+  overflow-x: hidden;
+  /* height: 100%; */
+}

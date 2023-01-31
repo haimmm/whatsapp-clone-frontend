@@ -1,0 +1,28 @@
+Figama design - https://www.figma.com/file/hRdlrjgwZEr5nCexsym6hr/WhatsApp-Web-App-UPDATED-(Community)?node-id=0%3A1&t=rDQzQA81b27YDoIJ-0
+System design - https://dev.to/karanpratapsingh/system-design-whatsapp-fld
+
+TODO:
+    status modal:
+
+    Design:
+        * responsiveness - done for large-medium screens.
+        * dark mode - 
+        - sidebar:
+            * top panel - done 21.12.22 [Haim]
+            * search bar - done 22.12.22 [Haim]
+            * chats list - 
+        - new chat slider:
+        - communities slider:
+        - status(story) modal:
+        - chat window:
+        
+
+        
+    
+    Functunality:
+
+
+
+
+
+    
