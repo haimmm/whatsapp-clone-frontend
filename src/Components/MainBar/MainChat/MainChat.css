@@ -1,6 +1,7 @@
-.main-chat-container{
+.main-chat-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: url('../../../Assets/images/chat_background.png');
+  background: url("../../../Assets/images/chat_background.png");
+  padding: 10px 30px;
 }

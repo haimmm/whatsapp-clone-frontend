@@ -12,6 +12,7 @@ type SlideContent = {
 };
 
 const SlideContext = React.createContext<SlideContent>({
+  //default context value
   slideClass: "",
   toggleSlide: () => "",
 });
@@ -20,7 +21,6 @@ export function SlideAnimationProvider({ children }: Props) {
   const [slideClass, setSlideClass] = useState<classOptions>("");
 
   function toggleSlide() {
-    console.log("toggling!!");
     setSlideClass((prevClass) =>
       prevClass === "slide-in" ? "slide-out" : "slide-in"
     );
