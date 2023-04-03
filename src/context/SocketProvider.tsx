@@ -5,8 +5,9 @@ type PropsType = {
   children: JSX.Element[] | JSX.Element;
 };
 
-type MessageType = {
+export type MessageType = {
   content: string;
+  isMyMessage: boolean;
   id?: string;
 };
 
@@ -27,7 +28,7 @@ const socket = io("http://localhost:3030");
 
 export function SocketProvider({ children }: PropsType) {
   const [messages, setMessages] = useState<MessageType[]>([
-    { content: "test meesage", id: "0" },
+    { content: "test meesage", id: "0", isMyMessage: true },
   ]);
 
   function displayNewMessage(message: MessageType) {

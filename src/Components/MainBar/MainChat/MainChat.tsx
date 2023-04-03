@@ -8,7 +8,7 @@ export default function MainChat(): JSX.Element {
   return (
     <ul className="main-chat-container">
       {messages.map((data) => (
-        <MessageBubble key={data.id} message={data.content} />
+        <MessageBubble key={data.id} message={data} />
       ))}
     </ul>
   );

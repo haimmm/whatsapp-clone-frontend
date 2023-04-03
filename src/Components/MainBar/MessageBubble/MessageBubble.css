@@ -3,8 +3,7 @@
   font-size: 1rem;
   line-height: 1.2rem;
   min-width: 150px;
-  color: white;
-  background: #075e54;
+  background: #dcf8c6;
   border-radius: 10px;
   padding: 12px;
   margin: 1px 0;
@@ -19,8 +18,34 @@
   position: absolute;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
-  border-top: 12px solid #075e54;
+  border-top: 12px solid #dcf8c6;
   border-bottom: 12px solid transparent;
   left: calc(100% - 12px);
+  bottom: calc(100% - 24px);
+}
+
+.response-message-bubble {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  min-width: 150px;
+  width: fit-content;
+  background: #ece5dd;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 1px 0;
+  list-style-type: none;
+}
+
+.response-message-bubble:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #ece5dd;
+  border-bottom: 12px solid transparent;
+  left: calc(-12px);
   bottom: calc(100% - 24px);
 }

@@ -14,7 +14,7 @@ export default function FooterBar(): JSX.Element {
   function handleSendMessage() {
     console.log("send clicked!");
     sendMessage(messageContent);
-    displayNewMessage({ content: messageContent });
+    displayNewMessage({ content: messageContent, isMyMessage: true });
     setMessageContent("");
   }
 
