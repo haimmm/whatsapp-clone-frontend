@@ -1,10 +1,16 @@
-.App {
+.app-container {
   /* border: 2px solid blue; */
   width: 90vw;
   max-width: 1600px;
   height: 90vh;
   background-color: white;
   display: flex;
+}
+
+.auth-container {
+  background-color: #dcf8c6;
+  width: 300px;
+  height: 450px;
 }
 
 button {

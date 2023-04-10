@@ -1,0 +1,28 @@
+.sign-in-box {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px;
+}
+
+.sign-in-box > h3 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.sign-in-box > p {
+  margin-bottom: 15px;
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.sign-in-box > form {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in-box input[type="email"],
+.sign-in-box input[type="password"] {
+  margin-bottom: 10px;
+}
