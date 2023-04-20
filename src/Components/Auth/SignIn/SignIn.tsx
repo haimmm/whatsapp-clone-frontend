@@ -1,41 +1,52 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { SignInFormType } from "../../../utils/chatAPI";
 import "./SignIn.css";
+import { useMutation } from "@tanstack/react-query";
+import { useAuthContext } from "../../../context/AuthProvider";
 
-type propTypes = {
-  setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>;
-};
+export default function SignIn() {
+  const { signIn } = useAuthContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: clientErrors },
+  } = useForm<SignInFormType>();
 
-type IFormInput = {
-  email: string;
-  password: string;
-};
+  const { mutate, isLoading, error: serverError } = useMutation(signIn);
 
-export default function SignIn({ setIsRegistered }: propTypes) {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  //combaning and shaping both errors from react-quary and react-hook-form into strings list
+  const formErrors: string[] = Object.values(clientErrors)
+    .map((err) => err.message)
+    .filter((msg) => msg) as string[];
+  if ((serverError as Error)?.message)
+    formErrors.push((serverError as Error).message);
 
   return (
-    <div className="sign-in-box">
+    <form onSubmit={handleSubmit((values) => mutate(values))}>
       <h3>Sign In</h3>
       <p>Please sign in to your account.</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="email"
-          {...register("email", {
-            required: true,
-            pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
-          })}
-        />
-        <input
-          type="password"
-          {...register("password", {
-            required: true,
-            pattern:
-              /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*]{8,15}$/i,
-          })}
-        />
-        <input type="submit" />
-      </form>
-    </div>
+      <input
+        type="email"
+        placeholder="Email address"
+        {...register("email", {
+          required: "Email is required.",
+        })}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        {...register("password", {
+          required: "Password is required.",
+        })}
+      />
+      <input type="submit" disabled={isLoading} />
+      {formErrors.length > 0 && (
+        <ul className="error-container">
+          {formErrors.map((err, i) => (
+            <li key={i}>{err}</li>
+          ))}
+        </ul>
+      )}
+    </form>
   );
 }

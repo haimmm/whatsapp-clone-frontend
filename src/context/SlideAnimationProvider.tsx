@@ -6,16 +6,12 @@ type Props = {
 
 type classOptions = "" | "slide-in" | "slide-out";
 
-type SlideContent = {
+type ContextType = {
   slideClass: classOptions;
   toggleSlide: () => void;
 };
 
-const SlideContext = React.createContext<SlideContent>({
-  //default context value
-  slideClass: "",
-  toggleSlide: () => "",
-});
+const SlideContext = React.createContext<ContextType | null>(null);
 
 export function SlideAnimationProvider({ children }: Props) {
   const [slideClass, setSlideClass] = useState<classOptions>("");
@@ -33,4 +29,22 @@ export function SlideAnimationProvider({ children }: Props) {
   );
 }
 
-export const useSlideContext = () => useContext(SlideContext);
+export const useSlideContext = () => {
+  const currentSlideContext = useContext(SlideContext);
+
+  if (!SlideContext) {
+    throw new Error(
+      "useSlideContext has to be used within <SlideContext.Provider>"
+    );
+  }
+
+  return currentSlideContext as ContextType;
+};
+
+//export const useSlideContext = () => useContext(SlideContext);
+
+// const SlideContext = React.createContext<SlideContent>({
+//   //default context value
+//   slideClass: "",
+//   toggleSlide: () => "",
+// });

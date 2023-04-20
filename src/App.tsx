@@ -1,27 +1,51 @@
-import { useState } from "react";
 import "./App.css";
-import SignIn from "./Components/Auth/SignIn/SignIn";
 import { SocketProvider } from "./context/SocketProvider";
 import { Chat } from "./Layouts/Chat/Chat";
 import { Sidebar } from "./Layouts/SideBar/SideBar";
-import SignUp from "./Components/Auth/SignUp/SignUp";
+import AuthForm from "./Components/Auth/AuthForm/AuthForm";
+import { useAuthContext } from "./context/AuthProvider";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function App() {
-  const user = undefined;
-  const [isRegistered, setIsRegistered] = useState<boolean>(true);
+  const { user } = useAuthContext();
+  const queryClient = new QueryClient();
+  // const { isLoading, isError, data, error } = useQuery({
+  //   queryKey: ["auth"],
+  // });
+
+  // useEffect(() => {
+  //   async function fetchDataAsync() {
+  //     try {
+  //       const response = await axios.post("http://localhost:3030/auth/login", {
+  //         email: "test@test",
+  //         password: "Aa123456",
+  //       });
+  //       console.log(response);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  //   fetchDataAsync();
+  // }, []);
 
   return (
-    <div className={user ? "app-container" : "auth-container"}>
+    <QueryClientProvider client={queryClient}>
       {user ? (
-        <SocketProvider>
-          <Sidebar />
-          <Chat />
-        </SocketProvider>
-      ) : isRegistered ? (
-        <SignIn {...{ setIsRegistered }} />
+        <div className="app-container">
+          <SocketProvider>
+            <Sidebar />
+            <Chat />
+          </SocketProvider>
+        </div>
       ) : (
-        <SignUp />
+        <AuthForm />
       )}
-    </div>
+    </QueryClientProvider>
   );
 }

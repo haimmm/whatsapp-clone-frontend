@@ -1,0 +1,69 @@
+.auth-container {
+  border: 1px solid black;
+  background-color: #dcf8c6;
+  width: 300px;
+  height: 450px;
+  padding: 40px 20px;
+}
+
+.auth-container h3 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  color: #128c7e;
+}
+
+.auth-container p {
+  margin-bottom: 15px;
+  color: #a8a5a1;
+  font-size: 0.8rem;
+}
+
+.auth-container > form {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+}
+
+.auth-container input::placeholder {
+  color: #128c7e;
+}
+
+.auth-container input[type="email"],
+.auth-container input[type="password"] {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 7px;
+  border: none;
+  outline: 1px solid #128c7e;
+  background-color: transparent;
+}
+
+.auth-container input[type="submit"] {
+  background-color: #128c7e;
+  border: none;
+  color: #ffff;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.auth-container input[type="submit"]:hover {
+  cursor: pointer;
+}
+
+.error-container {
+  background-color: #e88b8b;
+  padding: 5px;
+  color: #ce2029;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  list-style-position: inside;
+  list-style-type: none;
+}
+
+.btn-as-link {
+  all: unset;
+  color: #128c7e;
+  text-decoration: underline;
+}
