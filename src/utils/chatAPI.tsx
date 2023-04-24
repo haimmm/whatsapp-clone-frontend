@@ -10,12 +10,12 @@ export type SignUpFormType = {
   passwordConfirm: string;
 };
 
-const baseUrl = "http://localhost:3030";
+export const serverUrl = "http://localhost:3030";
 
 const api = {
   //   /AUTH/*
-  signIn: `${baseUrl}/auth/login`,
-  signUp: `${baseUrl}/auth/register`,
+  signIn: `${serverUrl}/auth/login`,
+  signUp: `${serverUrl}/auth/register`,
   // refresh: `${baseUrl}/auth/refresh`),
   //signOut
 };

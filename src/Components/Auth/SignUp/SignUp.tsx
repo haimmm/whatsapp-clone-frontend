@@ -1,19 +1,20 @@
 import { useRef } from "react";
 import "./SignUp.css";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { SignUpFormType } from "../../../utils/chatAPI";
+import { useAuthContext } from "../../../context/AuthProvider";
+import { useMutation } from "@tanstack/react-query";
 
 export default function SignUp() {
+  const { signUp } = useAuthContext();
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors: clientErrors },
   } = useForm<SignUpFormType>();
-  const onSubmit: SubmitHandler<SignUpFormType> = (data) => {
-    console.log("submit clicked ", data);
-    console.log(errors);
-  };
+
+  const { mutate, isLoading, error: serverError } = useMutation(signUp);
 
   const password = useRef({});
   password.current = watch("password", "");
@@ -21,8 +22,15 @@ export default function SignUp() {
   const validatePassword = (confirmPassVal: string) =>
     confirmPassVal === password.current ? true : "The passwords do not match.";
 
+  //combaning and shaping both errors from react-quary and react-hook-form into strings list
+  const formErrors: string[] = Object.values(clientErrors)
+    .map((err) => err.message)
+    .filter((msg) => msg) as string[];
+  if ((serverError as Error)?.message)
+    formErrors.push((serverError as Error).message);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit((values) => mutate(values))}>
       <h3>Sign Up</h3>
       <p>Please sign up to use the chat.</p>
       <input
@@ -58,12 +66,12 @@ export default function SignUp() {
           validate: validatePassword,
         })}
       />
-      <input type="submit" />
-      {!!Object.keys(errors).length && (
+      <input type="submit" disabled={isLoading} />
+      {formErrors.length > 0 && (
         <ul className="error-container">
-          {errors.email && <li>{errors.email.message}</li>}
-          {errors.password && <li>{errors.password.message}</li>}
-          {errors.passwordConfirm && <li>{errors.passwordConfirm.message}</li>}
+          {formErrors.map((err, i) => (
+            <li key={i}>{err}</li>
+          ))}
         </ul>
       )}
     </form>

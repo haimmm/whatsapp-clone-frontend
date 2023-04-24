@@ -35,9 +35,9 @@ export function AuthProvider({ children }: PropsType) {
       setUser(user);
       return user;
     } catch (e: unknown) {
-      throw new Error(
-        e instanceof AxiosError ? e.response?.data.error : "unknown error"
-      );
+      if (e instanceof AxiosError)
+        throw new Error(e.response?.data?.error || e.message);
+      else throw new Error("unexpected error");
     }
   };
 

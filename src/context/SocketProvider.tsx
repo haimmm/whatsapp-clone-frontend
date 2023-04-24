@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { io, Socket } from "socket.io-client";
+import { serverUrl } from "../utils/chatAPI";
 
 type PropsType = {
   children: JSX.Element[] | JSX.Element;
@@ -29,7 +30,7 @@ export function SocketProvider({ children }: PropsType) {
 
   const connect = () => {
     try {
-      socket = io("http://localhost:3030");
+      socket = io(serverUrl);
       console.log("connected to socket succesfully!");
 
       socket.on("recieve-message", (message: MessageType) => {
