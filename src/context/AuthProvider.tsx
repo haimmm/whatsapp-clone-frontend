@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import api, { SignInFormType, SignUpFormType } from "../utils/chatAPI";
-import axios, { AxiosError } from "axios";
+import { AxiosResponse } from "axios";
+import { httpTypes, fetchWrapper } from "../utils/axiosConfig";
 
 type PropsType = {
   children: JSX.Element[] | JSX.Element;
@@ -15,7 +16,7 @@ export type userType = {
 
 type ContextType = {
   user: userType;
-  signIn: (p: SignInFormType) => Promise<userType>;
+  signIn: (p: SignInFormType) => Promise<void>;
   signUp: (p: SignUpFormType) => Promise<void>;
   signOut: () => void;
 };
@@ -25,24 +26,25 @@ const AuthContext = React.createContext<ContextType | null>(null);
 export function AuthProvider({ children }: PropsType) {
   const [user, setUser] = useState<userType>(null);
 
-  const signIn = async (payload: SignInFormType): Promise<userType> => {
-    try {
-      console.log("trying to sign in...", api.signIn, payload);
-      const response = await axios.post(api.signIn, payload);
-      console.log("response: ", response);
-      const user: userType = response.data;
-      console.log("user signed in: ", user);
-      setUser(user);
-      return user;
-    } catch (e: unknown) {
-      if (e instanceof AxiosError)
-        throw new Error(e.response?.data?.error || e.message);
-      else throw new Error("unexpected error");
-    }
+  const signIn = async (payload: SignInFormType) => {
+    console.log("trying to sign in...");
+    const response: AxiosResponse = (await fetchWrapper(
+      httpTypes.POST,
+      api.signIn,
+      payload
+    )) as AxiosResponse;
+    const user: userType = response.data;
+    setUser(user);
   };
 
   const signUp = async (payload: SignUpFormType) => {
-    const user: userType = await axios.post(api.signUp, payload);
+    console.log("trying to sign up...");
+    const response: AxiosResponse = (await fetchWrapper(
+      httpTypes.POST,
+      api.signUp,
+      payload
+    )) as AxiosResponse;
+    const user: userType = response.data;
     //auto log in after register
     setUser(user);
   };
